@@ -5,18 +5,21 @@ public class Agent
     private readonly Environment _environment;
     private readonly int[] _actions;
     private readonly double _exploreProbability;
+    private readonly int _initialActionValue;
     private readonly List<int> _actionHistory = new();
     private readonly List<int> _rewardHistory = new();
 
     private readonly int[] _actionRewardSums;
     private readonly int[] _actionFrequency;
 
-    public Agent(Environment environment, IEnumerable<int> actions, double exploreProbability)
+    public Agent(Environment environment, IEnumerable<int> actions, double exploreProbability,
+        int initialActionValue = 0)
     {
         _environment = environment;
         _actions = actions.ToArray();
         _exploreProbability = exploreProbability;
-        
+        _initialActionValue = initialActionValue;
+
         _actionRewardSums = new int[_actions.Length];
         _actionFrequency = new int[_actions.Length];
     }
@@ -49,7 +52,7 @@ public class Agent
 
     private double AverageActionValue(int action)
     {
-        if (_actionFrequency[action] == 0) return 0;
+        if (_actionFrequency[action] == 0) return _initialActionValue;
 
         return (double)_actionRewardSums[action] / _actionFrequency[action];
     }

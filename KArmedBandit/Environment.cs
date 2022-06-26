@@ -15,10 +15,10 @@ public class Environment
         var rand = new Random();
         return action switch
         {
-            0 => rand.Next(0, 2),
-            1 => rand.Next(1, 4),
-            2 => rand.Next(5, 7),
-            3 => rand.Next(6, 7),
+            0 => rand.Next(0, 10),
+            1 => rand.Next(1, 10),
+            2 => rand.Next(5, 8),
+            3 => rand.Next(-2, 7),
             _ => throw new ArgumentException($"{nameof(action)} is not in range of available actions.")
         };
     }

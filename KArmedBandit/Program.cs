@@ -5,9 +5,9 @@ using KArmedBandit;
 using Environment = KArmedBandit.Environment;
 
 var env = new Environment();
-var actor = new Agent(env, new[] { 0, 1, 2, 3 }, 0.05);
+var actor = new Agent(env, new[] { 0, 1, 2, 3 }, 0, 10);
 
-for (var i = 0; i < 100000; i++)
+for (var i = 0; i < 100; i++)
 {
     actor.TakeAction();
 }
@@ -17,3 +17,8 @@ var lastThousandAverage = actor.RewardHistory.TakeLast(10).Average();
 
 Console.WriteLine($"First 10 actions had an average reward of {firstThousandAverage}.");
 Console.WriteLine($"Last 10 actions had an average reward of {lastThousandAverage}.");
+
+foreach (var action in actor.ActionHistory)
+{
+    Console.Write(action);
+}
