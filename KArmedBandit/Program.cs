@@ -1,13 +1,13 @@
-﻿// See https://aka.ms/new-console-template for more information
-
-using System.Threading.Channels;
-using KArmedBandit;
+﻿using KArmedBandit;
+using KArmedBandit.Reward;
 using Environment = KArmedBandit.Environment;
 
+var actions = new[] { 0, 1, 2, 3 };
 var env = new Environment();
-var actor = new Agent(env, new[] { 0, 1, 2, 3 }, 0, 10);
+IRewardEstimator estimator = new SimpleAverageEstimator(actions, 10);
+var actor = new Agent(env, estimator, actions);
 
-for (var i = 0; i < 100; i++)
+for (var i = 0; i < 1000; i++)
 {
     actor.TakeAction();
 }
