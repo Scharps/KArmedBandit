@@ -22,7 +22,7 @@ public class Agent
         var actionValues =
             (from a in _actions
             select _rewardEstimator.EstimatedReward(a)).ToList();
-
+        
         var maxValue = actionValues.Max();
         var greedy = actionValues.IndexOf(maxValue);
 
