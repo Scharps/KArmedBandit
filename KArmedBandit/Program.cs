@@ -12,13 +12,13 @@ for (var i = 0; i < 100; i++)
     agent.TakeAction();
 }
 
-var firstThousandAverage = agent.RewardHistory.Take(10).Average();
-var lastThousandAverage = agent.RewardHistory.TakeLast(10).Average();
+var firstThousandAverage = env.RewardHistory.Take(10).Average();
+var lastThousandAverage = env.RewardHistory.TakeLast(10).Average();
 
 Console.WriteLine($"First 10 actions had an average reward of {firstThousandAverage}.");
 Console.WriteLine($"Last 10 actions had an average reward of {lastThousandAverage}.");
 
-foreach (var action in agent.ActionHistory)
+foreach (var action in env.ActionHistory)
 {
     Console.Write(action);
 }

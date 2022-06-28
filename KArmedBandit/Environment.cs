@@ -3,11 +3,16 @@ namespace KArmedBandit;
 public class Environment
 {
     private int _time;
+    private readonly List<int> _actionHistory = new();
+    private readonly List<int> _rewardHistory = new();
 
     public int TakeAction(int action)
     {
+        _actionHistory.Add(action);
         _time++;
-        return RewardForAction(action);
+        var reward = RewardForAction(action);
+        _rewardHistory.Add(reward);
+        return reward;
     }
 
     private static int RewardForAction(int action)
@@ -24,4 +29,6 @@ public class Environment
     }
 
     public int Time => _time;
+    public IEnumerable<int> ActionHistory => _actionHistory;
+    public IEnumerable<int> RewardHistory => _rewardHistory;
 }

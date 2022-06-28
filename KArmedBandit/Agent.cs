@@ -8,8 +8,6 @@ public class Agent
     private readonly IRewardEstimator _rewardEstimator;
     private readonly int[] _actions;
     private readonly double _exploreProbability;
-    private readonly List<int> _actionHistory = new();
-    private readonly List<int> _rewardHistory = new();
 
     public Agent(Environment environment, IRewardEstimator rewardEstimator, IEnumerable<int> actions, double exploreProbability = 0)
     {
@@ -32,8 +30,6 @@ public class Agent
         var reward = _environment.TakeAction(action);
         
         _rewardEstimator.AddReward(action, reward);
-        _rewardHistory.Add(reward);
-        _actionHistory.Add(action);
     }
 
     private int GetAction(int greedy)
@@ -43,7 +39,4 @@ public class Agent
 
         return r > _exploreProbability ? greedy : rand.Next(0, _actions.Count());
     }
-
-    public IEnumerable<int> ActionHistory => _actionHistory;
-    public IEnumerable<int> RewardHistory => _rewardHistory;
 }
